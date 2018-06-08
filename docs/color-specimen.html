@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Color Specimen</title>
+
+    <link rel="stylesheet" type="text/css" href="common.css" />
+    <style>
+        .color-box {
+            font-family: 'Merriweather', serif;
+            font-weight: 700;
+            font-style: italic;
+            font-size: 1rem;
+
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+            text-align: center;
+
+            margin-bottom: 1.75rem;
+        }
+        .color {
+            width: 96px;
+            line-height: 96px;
+            margin-bottom: 0.75rem;
+            color: white;
+            cursor: pointer;
+        }
+        .color > div {
+            display: inline-block;
+            overflow: hidden;
+            width: 100%;
+            height: 1.2rem;
+            vertical-align: middle;
+        }
+        .color .container {
+            transition: transform 200ms ease-in-out;
+        }
+        .color:hover .container {
+            transform: translateY(-1.5rem);
+        }
+        .color span {
+            display: block;
+            line-height: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <div class="logo">Project Nikki</div>
+        <h1>Color<br />Specimen</h1>
+        
+        <h2>The Sora Family</h2>
+        <div class="color-box">
+            <div color="0C4694" name="S900" alias="Twilight"></div>
+            <div color="1F67BF" name="S700" alias="Noon"></div>
+            <div color="308FFF" name="S500" alias="Sora"></div>
+            <div color="6DB0FC" name="S300" alias="Dawn"></div>
+            <div color="9CCAFF" name="S100" alias="Cloud"></div>
+        </div>
+        <p>Word <em>Sora</em> stands for <em>Sky</em> in Japanese, the family abbrviation <em>S</em> being its initial letter. It conveys <em>purity, sanity and idealism</em>.</p>
+        <p>This color family tends to provide a <em>sky-like</em> feeling, with different variation representing the color of different time of the day.</p>
+
+        <h2>The Ichigo Family</h2>
+        <div class="color-box">
+            <div color="AD1529" name="I900" alias="Brewed"></div>
+            <div color="D9323A" name="I700" alias="Jam"></div>
+            <div color="FF5852" name="I500" alias="Ichigo"></div>
+            <div color="FF7c75" name="I300" alias="Candy"></div>
+            <div color="FFA9A8" name="I100" alias="Cream"></div>
+        </div>
+        <p>Word <em>Ichigo</em> stands for <em>Strawberry</em> in Japanese, the family abbrviation <em>I</em> being its initial letter. It conveys <em>relaxation, friendliness and hedonism</em>.</p>
+        <p>If the <em>Sora</em> family is used as the background, then the <em>Ichigo</em> family plays its role as the tesselating stars.</p>
+        <p>The different variations represent the different forms of <em>Strawberry</em>, while keeping its characteristics of being <em>sweet and soft</em>.</p>
+    </article>
+    <script>
+        document.querySelectorAll('div.color-box div').forEach(div => {
+            let attr = name => div.getAttribute(name);
+
+            let color = document.createElement('div');
+            color.classList.add('color');
+            color.style.backgroundColor = `#${attr('color')}`;
+            div.appendChild(color);
+            
+            let clip = document.createElement('div');
+            color.appendChild(clip);
+            let container = document.createElement('div');
+            container.classList.add('container');
+            clip.appendChild(container);
+            
+            ['name', 'color'].map(attr).map(text => {
+                let span = document.createElement('span');
+                span.textContent = text;
+                return span;
+            }).forEach(span => container.appendChild(span));
+
+            let alias = document.createElement('div');
+            alias.classList.add('color-alias');
+            alias.textContent = attr('alias');
+            div.appendChild(alias);
+        });
+    </script>
+</body>
+</html>
